@@ -4,7 +4,8 @@
       "Bash(npm run:*)",
       "Bash(grep -v \"^$\")",
       "WebFetch(domain:lottiefiles.com)",
-      "WebFetch(domain:lottie.host)"
+      "WebFetch(domain:lottie.host)",
+      "Bash(NODE_OPTIONS=--openssl-legacy-provider npx react-scripts build)"
     ],
     "additionalDirectories": [
       "/tmp"
