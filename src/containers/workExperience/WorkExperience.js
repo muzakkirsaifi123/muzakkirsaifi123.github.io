@@ -3,12 +3,12 @@ import "./WorkExperience.scss";
 import {workExperiences} from "../../portfolio";
 import StyleContext from "../../contexts/StyleContext";
 
-const BEACON   = 52;   // logo circle diameter (px)
-const STEP_H   = 70;   // vertical gap between nodes
-const PAD_T    = 30;
-const PAD_B    = 36;
-const L_PCT    = 0.22; // left-side x as fraction of width
-const R_PCT    = 0.78; // right-side x as fraction of width
+const BEACON   = 58;   // logo circle diameter (px)
+const STEP_H   = 100;  // vertical gap between nodes
+const PAD_T    = 40;
+const PAD_B    = 48;
+const L_PCT    = 0.35; // left-side x as fraction of width
+const R_PCT    = 0.65; // right-side x as fraction of width
 
 /* Calculate all node positions given container width */
 function calcPositions(N, W) {
