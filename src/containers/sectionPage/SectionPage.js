@@ -11,7 +11,9 @@ import WorkExperience from "../workExperience/WorkExperience";
 import StartupProject from "../StartupProjects/StartupProject";
 import Achievement from "../achievement/Achievement";
 import Education from "../education/Education";
+import Blogs from "../blogs/Blogs";
 import Footer from "../../components/footer/Footer";
+import Contact from "../contact/Contact";
 import {greeting} from "../../portfolio";
 import codingPerson from "../../assets/lottie/codingPerson";
 import buildLottie from "../../assets/lottie/build";
@@ -50,11 +52,17 @@ const SECTIONS = {
     lottie: codingPerson,
     components: [Education]
   },
+  blogs: {
+    label: "Blogs",
+    subtitle: "My writing & articles",
+    lottie: buildLottie,
+    components: [Blogs]
+  },
   contact: {
     label: "Contact",
     subtitle: "Let's Connect",
     lottie: emailLottie,
-    components: [Footer]
+    components: [Contact, Footer]
   }
 };
 

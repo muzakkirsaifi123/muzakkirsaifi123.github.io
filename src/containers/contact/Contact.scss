@@ -1,87 +1,444 @@
 @import "../../_globalColor";
 
-.contact-div-main {
+/* ─── Keyframes ─────────────────────────────────────────────────────────────── */
+@keyframes ct-blob-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, -30px) scale(1.08); }
+  66%  { transform: translate(-30px, 20px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes ct-card-glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 0.6;  transform: scale(1.15); }
+}
+
+@keyframes ct-arrow-bounce {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(5px); }
+}
+
+@keyframes ct-tag-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes ct-cta-ripple {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes ct-border-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ct-social-pop {
+  0%   { transform: translateY(12px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+/* ─── Particle canvas ────────────────────────────────────────────────────────── */
+.ct-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Section wrapper ────────────────────────────────────────────────────────── */
+.ct-section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 100px;
+  margin-top: 2rem;
+}
+
+/* ─── Floating blobs ─────────────────────────────────────────────────────────── */
+.ct-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ct-blob--1 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(106, 17, 203, 0.22), transparent 70%);
+  top: -60px;
+  left: -80px;
+  animation: ct-blob-drift 14s ease-in-out infinite;
+}
+
+.ct-blob--2 {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(37, 117, 252, 0.18), transparent 70%);
+  bottom: -40px;
+  right: -60px;
+  animation: ct-blob-drift 18s ease-in-out infinite reverse;
+}
+
+.ct-blob--3 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(0, 200, 180, 0.14), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ct-blob-drift 22s ease-in-out infinite 3s;
+}
+
+/* ─── Inner container ────────────────────────────────────────────────────────── */
+.ct-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
 }
 
-.dark-mode a {
-  color: $textColorDark;
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+.ct-header {
+  text-align: center;
 }
 
-.contact-div-main > * {
-  flex: 1;
-}
-
-.contact-title {
-  font-size: 65px;
-  font-weight: 400;
-}
-
-.contact-detail,
-.contact-detail-email {
-  margin-top: 20px;
-  font-size: 40px;
-  font-weight: 400;
-  color: $subTitle;
-  text-decoration: none;
-}
-
-.contact-detail:hover,
-.contact-detail-email:hover {
-  color: $textColor;
-  text-shadow: 2px 1px 2px $contactDetailHoverTS;
-  transition: all 0.3s;
-}
-
-.contact-subtitle {
+.ct-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(106, 17, 203, 0.15), rgba(37, 117, 252, 0.15));
+  border: 1px solid rgba(106, 17, 203, 0.3);
+  color: $buttonColor;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 16px;
 }
 
-.contact-text-div {
-  margin-top: 1.5rem;
+.dark-mode .ct-tag {
+  background: linear-gradient(135deg, rgba(106, 17, 203, 0.25), rgba(37, 117, 252, 0.25));
+  border-color: rgba(106, 17, 203, 0.5);
+  color: #a78bfa;
 }
 
-.contact-margin-top {
-  margin-top: 4rem;
+.ct-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, $titleColor 0%, $buttonColor 60%, #2575fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 14px;
+  line-height: 1.15;
 }
 
-.contact-image-div > img {
-  max-width: 100%;
-  height: auto;
-  margin-left: 1.5rem;
-  margin-top: -4rem;
+.dark-mode .ct-title {
+  background: linear-gradient(135deg, #e2e8f0 0%, #a78bfa 60%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Media Query */
-@media (max-width: 1380px), (max-width: 768px) {
-  .contact-title {
-    font-size: 56px;
-    font-weight: 400;
-    text-align: center;
-  }
+.ct-subtitle {
+  font-size: 1.05rem;
+  color: $subTitle;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+  text-align: justify;
+}
 
-  .contact-title {
-    font-size: 40px;
-    text-align: center;
-  }
+/* ─── Cards ──────────────────────────────────────────────────────────────────── */
+.ct-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
 
-  .contact-subtitle {
-    font-size: 16px;
-    line-height: normal;
-    text-align: center;
-  }
+.ct-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  min-width: 280px;
+  max-width: 420px;
+  padding: 22px 24px;
+  border-radius: 18px;
+  text-decoration: none;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
-  .contact-text-div {
-    text-align: center;
-    margin-top: 1.5rem;
-  }
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(106, 17, 203, 0.2);
+    border-color: rgba(106, 17, 203, 0.35);
 
-  .contact-detail,
-  .contact-detail-email {
-    font-size: 20px;
+    .ct-card-glow { animation: ct-card-glow-pulse 1.8s ease-in-out infinite; }
+    .ct-card-arrow { animation: ct-arrow-bounce 0.6s ease-in-out infinite; }
   }
+}
 
-  .contact-image-div {
-    display: none;
+.dark-mode .ct-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    box-shadow: 0 20px 48px rgba(106, 17, 203, 0.3);
+    border-color: rgba(167, 139, 250, 0.4);
   }
+}
+
+/* Glowing blob behind each card */
+.ct-card-glow {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  filter: blur(45px);
+  top: -40px;
+  right: -30px;
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+
+.ct-card--email .ct-card-glow { background: #6a11cb; }
+.ct-card--phone .ct-card-glow { background: #2575fc; }
+
+/* Icon circle */
+.ct-card-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.ct-card--email .ct-card-icon {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+.ct-card--phone .ct-card-icon {
+  background: linear-gradient(135deg, #00c9a7, #2575fc);
+}
+
+.ct-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ct-card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $subTitle;
+}
+
+.ct-card-value {
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: $textColor;
+  word-break: break-all;
+}
+
+.dark-mode .ct-card-label { color: rgba(255,255,255,0.5); }
+.dark-mode .ct-card-value { color: $textColorDark; }
+
+.ct-card-arrow {
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: $buttonColor;
+  opacity: 0.7;
+}
+
+/* ─── Tag dot (availability indicator) ──────────────────────────────────────── */
+.ct-tag-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  margin-right: 7px;
+  animation: ct-tag-blink 2s ease-in-out infinite;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+/* ─── CTA button ─────────────────────────────────────────────────────────────── */
+.ct-cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  border-radius: 100px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  box-shadow: 0 8px 32px rgba(106, 17, 203, 0.4);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 16px 48px rgba(106, 17, 203, 0.55);
+    filter: brightness(1.1);
+
+    .ct-cta-ripple { animation: ct-cta-ripple 0.7s ease-out forwards; }
+    .ct-cta-icon   { transform: rotate(-20deg) scale(1.2); }
+  }
+}
+
+.ct-cta-icon {
+  font-size: 1.15rem;
+  transition: transform 0.3s ease;
+}
+
+.ct-cta-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255,255,255,0.18);
+  transform: scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─── Animated card border ───────────────────────────────────────────────────── */
+.ct-card-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    #6a11cb, #2575fc, #00c9a7, #6a11cb
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+}
+
+.ct-card:hover .ct-card-border {
+  opacity: 1;
+  animation: ct-border-spin 3s linear infinite;
+}
+
+/* ─── Divider ────────────────────────────────────────────────────────────────── */
+.ct-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 500px;
+
+  span:first-child,
+  span:last-child {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(106,17,203,0.3), transparent);
+  }
+}
+
+.ct-divider-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $subTitle;
+  white-space: nowrap;
+  flex: none !important;
+  height: auto !important;
+  background: none !important;
+}
+
+.dark-mode .ct-divider-text { color: rgba(255,255,255,0.35); }
+
+/* ─── Social links ───────────────────────────────────────────────────────────── */
+.ct-socials-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.ct-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  animation: ct-social-pop 0.5s ease both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+
+  i { font-size: 1rem; }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.07);
+    filter: brightness(1.18);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+  }
+}
+
+/* Per-platform colours */
+.ct-github        { background: linear-gradient(135deg, #24292e, #40464d); }
+.ct-linkedin      { background: linear-gradient(135deg, #0077b5, #005fa3); }
+.ct-gmail         { background: linear-gradient(135deg, #ea4335, #c5221f); }
+.ct-twitter       { background: linear-gradient(135deg, #1da1f2, #0d8ad6); }
+.ct-instagram     { background: linear-gradient(135deg, #e1306c, #c13584, #833ab4); }
+.ct-medium        { background: linear-gradient(135deg, #00ab6c, #00874f); }
+.ct-stackoverflow { background: linear-gradient(135deg, #f58025, #de6b10); }
+.ct-gitlab        { background: linear-gradient(135deg, #fc6d26, #e24329); }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ct-section { padding: 60px 0 80px; }
+
+  .ct-cards { flex-direction: column; align-items: center; }
+
+  .ct-card { max-width: 100%; }
+
+  .ct-socials-row { gap: 8px; }
+
+  .ct-social-btn { padding: 9px 14px; font-size: 0.82rem; }
 }
