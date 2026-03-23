@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>MuZakkir Saifi Portfolio</title>
+    <script>
+      // GitHub Pages SPA redirect trick
+      // When GH Pages would serve a 404 (e.g. /admin, /ownadmin), this page
+      // encodes the path into a query string and redirects to index.html,
+      // where the decode script restores the real URL before React boots.
+      //
+      // segmentCount = 0  →  User Pages (repo named username.github.io, served at root)
+      // segmentCount = 1  →  Project Pages (served at /repo-name/)
+      var segmentCount = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +
+        l.pathname.split("/").slice(0, 1 + segmentCount).join("/") + "/?/" +
+        l.pathname.slice(1).split("/").slice(segmentCount).join("/")
+          .replace(/&/g, "~and~") +
+        (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
