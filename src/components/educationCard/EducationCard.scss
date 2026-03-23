@@ -155,12 +155,18 @@
 
 .edu-card-left {
   position: relative; z-index: 1;
-  display: flex; align-items: center; gap: 12px; min-width: 0;
+  display: flex; align-items: center; gap: 12px;
+  flex: 1; min-width: 0; overflow: hidden;
 }
 
 .edu-card-right {
   position: relative; z-index: 1;
-  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0; margin-left: 8px;
+}
+
+.edu-card-text {
+  min-width: 0; flex: 1; overflow: hidden;
 }
 
 .edu-card-thumb {
