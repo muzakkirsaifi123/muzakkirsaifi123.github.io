@@ -1,0 +1,96 @@
+/* ── Full-screen section transition overlay ───────────────── */
+.nav-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    #0d0820 0%,
+    #1a0a35 50%,
+    #0d0820 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.nav-transition--hold,
+.nav-transition--enter {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav-transition--exit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Inner content ────────────────────────────────────────── */
+.nav-transition-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s,
+    opacity 0.4s ease 0.1s;
+}
+
+.nav-transition--hold .nav-transition-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.nav-transition--exit .nav-transition-inner {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.3s ease;
+}
+
+/* ── Lottie ───────────────────────────────────────────────── */
+.nav-transition-lottie {
+  width: 220px;
+  height: 220px;
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+.nav-transition-label {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  background: linear-gradient(135deg, #c8c4ff, #8c43ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Loading bar ──────────────────────────────────────────── */
+.nav-transition-bar {
+  width: 180px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.nav-transition-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(to right, #55198b, #8c43ce);
+  width: 0%;
+  animation: nav-bar-fill 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+}
+
+@keyframes nav-bar-fill {
+  to {
+    width: 100%;
+  }
+}

@@ -1,31 +1,269 @@
-.experience-cards-div {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 1rem 1rem;
-}
+@import "../../_globalColor";
 
 .experience-heading {
-  font-size: 56px;
+  font-size: 44px;
   font-weight: 400;
+  margin-bottom: 2.5rem;
 }
 
 .experience-container {
-  display: flex;
   width: 90%;
   padding: 20px 10px;
   margin: 0px auto;
   margin-top: 2rem;
 }
 
-.experience-container > * {
+/* ── Timeline wrapper ─────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding: 0 0 2rem;
+}
+
+/* Center vertical line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    $buttonColor 8%,
+    $buttonHover 50%,
+    $buttonColor 92%,
+    transparent
+  );
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+/* ── Reveal wrapper — must not affect layout ──────────────── */
+[data-reveal] > .timeline-item {
+  /* ensure no inherited transform breaks the timeline positioning */
+}
+
+/* ── Timeline item ─────────────────────────────────────────── */
+.timeline-item {
+  position: relative;
+  width: 46%;
+  margin-bottom: 3rem;
+}
+
+.timeline-item--left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item--right {
+  left: 54%;
+  text-align: left;
+}
+
+/* ── Logo dot on the center line ──────────────────────────── */
+.timeline-dot {
+  position: absolute;
+  top: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: $lightBackground2;
+  border: 3px solid $buttonColor;
+  box-shadow: 0 0 0 5px rgba(85, 25, 139, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item--left .timeline-dot {
+  right: -8.5%;
+}
+
+.timeline-item--right .timeline-dot {
+  left: -8.5%;
+}
+
+.timeline-dot:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 8px rgba(85, 25, 139, 0.18);
+}
+
+.timeline-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+.timeline-card {
+  background: $lightBackground2;
+  border: 1px solid $lightBorder1;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transition: transform 0.32s cubic-bezier(0.34, 1.4, 0.64, 1),
+    box-shadow 0.32s ease;
+}
+
+.timeline-card--dark {
+  background: lighten(#171c28, 4%);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.timeline-card:hover,
+.timeline-card--dark:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(85, 25, 139, 0.18);
+}
+
+/* Connector nub toward center line */
+.timeline-item--left .timeline-card::after {
+  content: "";
+  position: absolute;
+  top: 26px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 10px solid $lightBorder1;
+}
+
+.timeline-item--right .timeline-card::after {
+  content: "";
+  position: absolute;
+  top: 26px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 10px solid $lightBorder1;
+}
+
+/* ── Card content ─────────────────────────────────────────── */
+.timeline-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.timeline-item--left .timeline-card-header {
+  flex-direction: row-reverse;
+}
+
+.timeline-card-header-info {
   flex: 1;
 }
 
-/* Media Query */
+.timeline-role {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: $textColor;
+  margin: 0 0 2px;
+}
 
+.dark-mode-text.timeline-role,
+.timeline-card--dark .timeline-role {
+  color: $textColorDark;
+}
+
+.timeline-company {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: $buttonColor;
+  margin: 0;
+}
+
+.timeline-date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $subTitle;
+  white-space: nowrap;
+  background: rgba(85, 25, 139, 0.08);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 2px;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.timeline-item--left .timeline-desc {
+  text-align: right;
+}
+
+.timeline-bullets {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.timeline-item--left .timeline-bullets {
+  padding-left: 0;
+  padding-right: 1.2rem;
+  list-style-position: inside;
+}
+
+/* ── Media Queries ────────────────────────────────────────── */
 @media (max-width: 1380px) {
   .experience-heading {
     font-size: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Switch to single-column left-aligned timeline */
+  .timeline-line {
+    left: 26px;
+  }
+
+  .timeline-item {
+    width: calc(100% - 60px);
+    left: 60px !important;
+    text-align: left !important;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item--left .timeline-card::after,
+  .timeline-item--right .timeline-card::after {
+    left: -10px;
+    right: auto;
+    border-right: 10px solid $lightBorder1;
+    border-left: none;
+  }
+
+  .timeline-item--left .timeline-dot,
+  .timeline-item--right .timeline-dot {
+    left: -50px;
+    right: auto;
+  }
+
+  .timeline-item--left .timeline-card-header {
+    flex-direction: row;
+  }
+
+  .timeline-item--left .timeline-desc {
+    text-align: left;
+  }
+
+  .timeline-item--left .timeline-bullets {
+    padding-left: 1.2rem;
+    padding-right: 0;
+    list-style-position: outside;
   }
 }
 
@@ -33,5 +271,13 @@
   .experience-heading {
     font-size: 30px;
     text-align: center;
+  }
+
+  .timeline-role {
+    font-size: 0.95rem;
+  }
+
+  .timeline-company {
+    font-size: 0.82rem;
   }
 }

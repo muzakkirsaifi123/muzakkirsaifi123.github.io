@@ -1,5 +1,47 @@
 @import "../_globalColor";
 
+/* ── Scroll reveal (Tesla-style) ───────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  /* Long ease-out for a smooth "slide in from afar" feel */
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-64px);
+}
+[data-reveal="right"] {
+  transform: translateX(64px);
+}
+[data-reveal="up"] {
+  transform: translateY(50px);
+}
+[data-reveal="zoom"] {
+  transform: scale(0.85) translateY(20px);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Reveal wrapper divs inside grid/flex containers — fill their slot fully */
+.achievement-cards-div > [data-reveal],
+.education-card-container > [data-reveal] {
+  display: flex;
+  flex-direction: column;
+}
+
 .dark-mode {
   background-color: $darkBackground;
   color: white;

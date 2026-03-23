@@ -1,0 +1,71 @@
+/* Hide default cursor on non-touch devices — only when cursor effect is mounted */
+@media (hover: hover) and (pointer: fine) {
+  body.cursor-effect-on,
+  body.cursor-effect-on * {
+    cursor: none !important;
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #8c43ce;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    margin-left: -4px;
+    margin-top: -4px;
+    will-change: transform;
+    transition: opacity 0.2s;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(140, 67, 206, 0.55);
+    pointer-events: none;
+    z-index: 99998;
+    opacity: 0;
+    margin-left: -18px;
+    margin-top: -18px;
+    will-change: transform;
+    transition: opacity 0.2s, width 0.2s, height 0.2s, border-color 0.2s;
+  }
+
+  /* Ring enlarges when hovering interactive elements */
+  a:hover ~ .cursor-ring,
+  button:hover ~ .cursor-ring {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(140, 67, 206, 0.8);
+  }
+}
+
+/* Sparkle particles */
+.cursor-sparkle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99997;
+  transform: translate(-50%, -50%);
+  animation: sparkle-burst 0.7s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes sparkle-burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0);
+  }
+}

@@ -1,9 +1,57 @@
 @import "../../_globalColor";
 
+/* ── Decorative blob behind skills section ──────────────────── */
+#skills {
+  position: relative;
+}
+
+#skills::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, $buttonColor, transparent 70%);
+  opacity: 0.07;
+  top: -60px;
+  right: -80px;
+  pointer-events: none;
+  animation: skills-blob 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+#skills::after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, $buttonHover, transparent 70%);
+  opacity: 0.07;
+  bottom: 40px;
+  left: -60px;
+  pointer-events: none;
+  animation: skills-blob 14s ease-in-out infinite alternate-reverse;
+  z-index: 0;
+}
+
+@keyframes skills-blob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(20px, 30px) scale(1.1);
+  }
+}
+
 .skills-main-div {
   display: flex;
   width: 100%;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  gap: 2rem;
 }
 
 .skills-text-div {
@@ -15,13 +63,21 @@
   margin-bottom: 30px;
 }
 
+.skills-image-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 480px;
+  overflow: hidden;
+}
+
 .skills-image-div > img {
   max-width: 100%;
   height: auto;
 }
 
 .skills-heading {
-  font-size: 56px;
+  font-size: 44px;
   font-weight: 400;
 }
 .subTitle {

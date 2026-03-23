@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import "./StartupProjects.scss";
 import {bigProjects} from "../../portfolio";
-import {Fade} from "react-reveal";
 import StyleContext from "../../contexts/StyleContext";
 
 export default function StartupProject() {
@@ -18,25 +17,29 @@ export default function StartupProject() {
     return null;
   }
   return (
-    <Fade bottom duration={1000} distance="20px">
-      <div className="main" id="projects">
-        <div>
-          <h1 className="skills-heading">{bigProjects.title}</h1>
-          <p
-            className={
-              isDark
-                ? "dark-mode project-subtitle"
-                : "subTitle project-subtitle"
-            }
-          >
-            {bigProjects.subtitle}
-          </p>
+    <div className="main" id="projects">
+      <div>
+        <h1 className="skills-heading" data-reveal="up">{bigProjects.title}</h1>
+        <p
+          data-reveal="up"
+          style={{transitionDelay: "0.1s"}}
+          className={
+            isDark
+              ? "dark-mode project-subtitle"
+              : "subTitle project-subtitle"
+          }
+        >
+          {bigProjects.subtitle}
+        </p>
 
           <div className="projects-container">
             {bigProjects.projects.map((project, i) => {
               return (
                 <div
                   key={i}
+                  data-index={`0${i + 1}`}
+                  data-reveal={i % 2 === 0 ? "left" : "right"}
+                  style={{transitionDelay: `${i * 0.15}s`}}
                   className={
                     isDark
                       ? "dark-mode project-card project-card-dark"
@@ -89,6 +92,6 @@ export default function StartupProject() {
           </div>
         </div>
       </div>
-    </Fade>
+    </div>
   );
 }

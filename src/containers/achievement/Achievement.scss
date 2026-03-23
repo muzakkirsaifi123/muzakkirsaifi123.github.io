@@ -1,5 +1,40 @@
 @import "../../_globalColor";
 
+/* ── Achievement section wrapper ───────────────────────────── */
+#achievements {
+  position: relative;
+  overflow: visible;
+}
+
+#achievements::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, $buttonHover, transparent 70%);
+  opacity: 0.07;
+  top: -40px;
+  left: -80px;
+  pointer-events: none;
+  animation: ach-blob 11s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes ach-blob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(25px, 15px) scale(1.12);
+  }
+}
+
+.achievement-main-div {
+  position: relative;
+  z-index: 1;
+}
+
 .achievement-heading {
   font-size: 56px;
   font-weight: 400;

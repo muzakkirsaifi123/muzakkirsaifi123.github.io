@@ -69,13 +69,23 @@
   transition: transform 0.25s ease;
 }
 
-.header li a:hover {
+.header li a:hover,
+.header li a.active {
   color: $buttonColor;
   background-color: transparent;
 }
 
-.header li a:hover::after {
+.header li a:hover::after,
+.header li a.active::after {
   transform: scaleX(1);
+}
+
+.dark-menu li a.active {
+  color: $buttonHover !important;
+}
+
+.header li a.active::after {
+  background: linear-gradient(to right, $buttonColor, $buttonHover);
 }
 
 .header .menu-btn:hover {

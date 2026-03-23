@@ -1,9 +1,41 @@
 @import "./globalColor";
 
+/* ── Global dot-grid background ─────────────────────────────── */
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(100, 91, 235, 0.065) 1.2px,
+    transparent 1.2px
+  );
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Slightly stronger in dark mode */
+.dark-mode body::before,
+body:has(.dark-mode)::before {
+  background-image: radial-gradient(
+    circle,
+    rgba(140, 67, 206, 0.1) 1.2px,
+    transparent 1.2px
+  );
+}
+
 .App {
   text-align: center;
   width: 100%;
   overflow-x: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .App-logo {

@@ -1,21 +1,21 @@
 @import "../../_globalColor";
 
+/* ── Bar track ──────────────────────────────────────────────── */
 .meter {
-  height: 20px;
+  height: 14px;
   position: relative;
   background: $progressBarBackground;
-  -moz-border-radius: 25px;
-  -webkit-border-radius: 25px;
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
+  margin-bottom: 4px;
 }
+
+/* ── Bar fill — gradient shimmer ───────────────────────────── */
 .meter > span {
   display: block;
   height: 100%;
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
+  /* Same purple shimmer as before, always running */
   background: linear-gradient(
     90deg,
     $progressBarSpanBG 0%,
@@ -25,7 +25,23 @@
   background-size: 200% 100%;
   position: relative;
   overflow: hidden;
-  animation: progress-shimmer 2.4s linear infinite;
+  animation: progress-shimmer 2.2s linear infinite;
+  will-change: width;
+}
+
+/* bright sweep overlay */
+.meter > span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: bar-sweep 2.6s ease-in-out infinite;
 }
 
 @keyframes progress-shimmer {
@@ -36,9 +52,42 @@
     background-position: -200% center;
   }
 }
-.skill {
-  line-height: 3.5vw;
+
+@keyframes bar-sweep {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
+
+/* ── Skill row ──────────────────────────────────────────────── */
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.skill-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  color: inherit;
+}
+
+.skill-pct {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: $buttonColor;
+  letter-spacing: 0.02em;
+}
+
 .skill-bars {
   font-size: 28px;
   width: 40%;

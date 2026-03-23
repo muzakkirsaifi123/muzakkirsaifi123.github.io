@@ -1,0 +1,142 @@
+@import "../../_globalColor";
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+.section-page {
+  min-height: 100vh;
+  background: $lightBackground1;
+  color: $textColor;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode.section-page {
+  background: $darkBackground;
+  color: $textColorDark;
+}
+
+/* ── Top bar ──────────────────────────────────────────────── */
+.sp-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid $lightBorder1;
+}
+
+.dark-menu.sp-topbar {
+  background: rgba(23, 28, 40, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.sp-back-btn {
+  background: rgba(85, 25, 139, 0.1);
+  border: 1px solid rgba(85, 25, 139, 0.25);
+  color: $buttonColor;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.sp-back-btn:hover {
+  background: $buttonColor;
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+.sp-logo {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.sp-logo-name {
+  font-family: "Agustina Regular", cursive;
+  font-weight: bold;
+  padding: 0 8px;
+  color: $buttonColor;
+}
+
+.sp-toggle {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Hero section ─────────────────────────────────────────── */
+.sp-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sp-hero--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.sp-hero-lottie {
+  width: 220px;
+  height: 220px;
+}
+
+.sp-hero-text {
+  margin-top: 1rem;
+}
+
+.sp-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0 0 0.4rem;
+  background: linear-gradient(135deg, $buttonColor, $buttonHover);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sp-subtitle {
+  font-size: 1rem;
+  color: $subTitle;
+  margin: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+.sp-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  padding-bottom: 3rem;
+}
+
+.sp-content--visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sp-topbar {
+    padding: 12px 16px;
+  }
+
+  .sp-title {
+    font-size: 2rem;
+  }
+
+  .sp-hero-lottie {
+    width: 160px;
+    height: 160px;
+  }
+}
