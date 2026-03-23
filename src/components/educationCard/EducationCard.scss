@@ -1,134 +1,399 @@
 @import "../../_globalColor";
 
-.education-card {
+/* ═══════════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════════ */
+@keyframes eduSlideLeft {
+  from { opacity: 0; transform: translateX(-52px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes eduSlideRight {
+  from { opacity: 0; transform: translateX(52px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes eduDotPulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.8); opacity: 0;   }
+}
+@keyframes eduBorderSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes eduModalIn {
+  from { opacity: 0; transform: scale(0.88) translateY(28px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+@keyframes eduBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes eduBulletPop {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TIMELINE ITEM ROW
+═══════════════════════════════════════════════════════════ */
+.edu-item {
+  position: relative;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation-fill-mode: both;
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+  &--left {
+    animation-name: eduSlideLeft;
+    padding-right: calc(50% + 38px);
+    .edu-dot { right: calc(50% - 26px); }
+  }
+  &--right {
+    animation-name: eduSlideRight;
+    padding-left: calc(50% + 38px);
+    .edu-dot { left: calc(50% - 26px); }
+  }
 }
 
-.education-card:hover + .education-card-border {
-  border-color: $educationCardBorder;
-  width: 100%;
-  -webkit-transition: width 0.6s ease-in-out;
-  -moz-transition: width 0.6s ease-in-out;
-  -o-transition: width 0.6s ease-in-out;
-  transition: width 0.6s ease-in-out;
+/* ═══════════════════════════════════════════════════════════
+   TIMELINE DOT
+═══════════════════════════════════════════════════════════ */
+.edu-dot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px; height: 52px;
+  z-index: 2;
+  flex-shrink: 0;
 }
 
-.education-card-border {
-  height: 30px;
-  width: 80%;
-  border-top: 2px solid $lightBorder1;
-  margin-bottom: 20px;
-  -webkit-transition: width 0.6s ease-in-out;
-  -moz-transition: width 0.6s ease-in-out;
-  -o-transition: width 0.6s ease-in-out;
-  transition: width 0.6s ease-in-out;
-}
-
-.education-head {
-  display: flex;
-  flex-direction: row;
-}
-
-.education-text-school {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  height: 27px;
-}
-
-.education-roundedimg {
-  object-fit: cover;
-  margin-right: 2rem;
-  width: 6rem;
-  height: 6rem;
-  box-shadow: 0 0.5rem 1rem $lightBoxShadowDarker;
+.edu-dot-ring {
+  position: absolute; inset: 0;
   border-radius: 50%;
+  border: 1.5px solid rgba($buttonColor, 0.5);
+  animation: eduDotPulse 3.2s ease-out infinite;
+  &--1 { animation-delay: 0s;   }
+  &--2 { animation-delay: 1.6s; }
 }
 
-.education-card-right {
-  max-width: 70%;
+.edu-dot-core {
+  position: absolute; inset: 7px;
+  border-radius: 50%;
+  background: $lightBackground2;
+  border: 2px solid rgba($buttonColor, 0.55);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 0 4px rgba($buttonColor, 0.09), 0 4px 14px rgba(0,0,0,0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  img { width: 24px; height: 24px; object-fit: contain; border-radius: 50%; }
+  i   { font-size: 0.88rem; color: $buttonColor; }
 }
 
-.education-text-subHeader {
-  color: $textColor;
-  font-weight: 700;
-  font-size: 19px;
-  margin: 0px;
-  padding-top: 0.8rem;
-  line-height: normal;
+.edu-item--dark .edu-dot-core {
+  background: lighten(#171c28, 5%);
+  border-color: rgba($buttonColor, 0.65);
 }
 
-.education-text-duration {
-  color: $titleColor;
-  font-size: 19px;
-  margin: 0px;
-  padding-top: 0.5rem;
+/* ═══════════════════════════════════════════════════════════
+   COMPACT CARD (button)
+═══════════════════════════════════════════════════════════ */
+.edu-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba($buttonColor, 0.16);
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  /* Spin border on hover */
+  &::before {
+    content: "";
+    position: absolute; inset: -2px;
+    border-radius: 20px;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0%, rgba($buttonColor, 0.65) 18%, transparent 36%
+    );
+    animation: eduBorderSpin 3.5s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.13), 0 0 0 1px rgba($buttonColor, 0.3);
+    border-color: rgba($buttonColor, 0.35);
+    &::before { opacity: 1; }
+    .edu-dot-core { transform: scale(1.16); box-shadow: 0 0 18px rgba($buttonColor,0.5); }
+    .edu-card-open-hint { opacity: 1; transform: scale(1); }
+  }
+
+  &--dark {
+    background: rgba(16,14,28,0.93);
+    border-color: rgba($buttonColor, 0.22);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+
+    &:hover {
+      box-shadow: 0 14px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba($buttonColor, 0.4);
+    }
+  }
 }
 
-.education-text-desc {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+.edu-card-left {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 12px; min-width: 0;
 }
 
-.education-text-bullets > ul {
-  margin-top: 0.5rem;
+.edu-card-right {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
 }
 
-/* Media Query */
+.edu-card-thumb {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: $lightBackground3;
+  border: 1px solid rgba($buttonColor, 0.16);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  img { width: 28px; height: 28px; object-fit: contain; border-radius: 6px; }
+}
+.edu-card--dark .edu-card-thumb { background: rgba(255,255,255,0.06); }
 
-@media (max-width: 1380px) {
-  .education-card {
-    flex-direction: column;
-    padding-bottom: 10px;
-  }
-  .education-card-right {
-    max-width: 90%;
-  }
-  .education-card-border {
-    width: 90%;
-  }
-  .education-text-subHeader {
-    padding-top: 0.5rem;
-    font-size: 16px;
-  }
-  .education-text-school {
-    font-size: 20px;
-    height: 23px;
-  }
-  .education-text-duration {
-    font-size: 16px;
-  }
-  .education-roundedimg {
-    width: 4rem;
-    height: 4rem;
-    margin-bottom: 0.5rem;
-    margin-right: 0px;
+.edu-card-name {
+  font-size: 0.97rem; font-weight: 800;
+  color: $textColor; margin: 0 0 3px;
+  line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.edu-card--dark .edu-card-name { color: #e2e8f0; }
+
+.edu-card-degree {
+  font-size: 0.79rem; font-weight: 600;
+  color: $buttonColor; margin: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.edu-card-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.73rem; font-weight: 700;
+  color: $subTitle;
+  background: rgba($buttonColor, 0.07);
+  border: 1px solid rgba($buttonColor, 0.15);
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  i { font-size: 0.68rem; }
+}
+
+.edu-card-open-hint {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba($buttonColor, 0.1);
+  border: 1px solid rgba($buttonColor, 0.22);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.4;
+  transform: scale(0.85);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  i { font-size: 0.65rem; color: $buttonColor; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL BACKDROP
+═══════════════════════════════════════════════════════════ */
+.edu-modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9000;
+  padding: 20px;
+  animation: eduBackdropIn 0.25s ease both;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL CARD
+═══════════════════════════════════════════════════════════ */
+.edu-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.98);
+  border: 1px solid rgba($buttonColor, 0.22);
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.22),
+    0 0 0 1px rgba($buttonColor, 0.08) inset;
+  overflow: hidden;
+  animation: eduModalIn 0.4s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+
+  &--dark {
+    background: rgba(14, 12, 26, 0.97);
+    border-color: rgba($buttonColor, 0.3);
+    box-shadow:
+      0 32px 80px rgba(0,0,0,0.6),
+      0 0 0 1px rgba($buttonColor, 0.12) inset;
   }
 }
 
+/* Spinning conic border */
+.edu-modal-border-spin {
+  position: absolute; inset: -2px;
+  border-radius: 26px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba($buttonColor, 0.7) 18%,
+    rgba($buttonHover, 0.5) 36%,
+    transparent 54%
+  );
+  animation: eduBorderSpin 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.edu-modal-body {
+  position: relative; z-index: 1;
+  padding: 28px 30px 26px;
+  background: inherit;
+  border-radius: 24px;
+}
+
+/* Close button */
+.edu-modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba($buttonColor, 0.25);
+  background: rgba($buttonColor, 0.08);
+  color: $buttonColor;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba($buttonColor, 0.2);
+    transform: scale(1.12) rotate(90deg);
+  }
+}
+
+/* Head */
+.edu-modal-head {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 14px; padding-right: 40px;
+}
+
+.edu-modal-logo {
+  flex-shrink: 0;
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  background: $lightBackground3;
+  border: 1px solid rgba($buttonColor, 0.2);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba($buttonColor, 0.2);
+
+  img { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; }
+}
+.edu-modal--dark .edu-modal-logo { background: rgba(255,255,255,0.06); }
+
+.edu-modal-school {
+  font-size: 1.2rem; font-weight: 800;
+  color: $textColor; margin: 0 0 5px; line-height: 1.2;
+}
+.edu-modal--dark .edu-modal-school { color: #e2e8f0; }
+
+.edu-modal-degree {
+  font-size: 0.92rem; font-weight: 600;
+  color: $buttonColor; margin: 0;
+}
+
+/* Duration badge */
+.edu-modal-duration {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.76rem; font-weight: 700;
+  color: $subTitle;
+  background: rgba($buttonColor, 0.08);
+  border: 1px solid rgba($buttonColor, 0.15);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+  i { font-size: 0.7rem; }
+}
+
+/* Divider */
+.edu-modal-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba($buttonColor, 0.3), transparent);
+  margin-bottom: 16px;
+}
+
+/* Description */
+.edu-modal-desc {
+  font-size: 0.9rem; line-height: 1.78;
+  color: $subTitle; margin: 0 0 14px;
+  text-align: justify; hyphens: auto;
+}
+.edu-modal--dark .edu-modal-desc { color: rgba(226,232,240,0.68); }
+
+/* Bullets */
+.edu-modal-bullets {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 9px;
+
+  li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.88rem; line-height: 1.65; color: $subTitle;
+    opacity: 0;
+    animation: eduBulletPop 0.35s ease forwards;
+
+    @for $i from 1 through 8 {
+      &:nth-child(#{$i}) { animation-delay: #{0.15 + $i * 0.07}s; }
+    }
+  }
+}
+.edu-modal--dark .edu-modal-bullets li { color: rgba(226,232,240,0.62); }
+
+.edu-modal-dot {
+  flex-shrink: 0; margin-top: 7px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: linear-gradient(135deg, $buttonColor, $buttonHover);
+  box-shadow: 0 0 6px rgba($buttonColor, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .education-card {
-    text-align: center;
+  .edu-item {
+    padding-left: 52px !important;
+    padding-right: 0 !important;
+    flex-direction: column !important;
+
+    .edu-dot {
+      left: -4px !important; right: auto !important;
+      top: 14px !important; transform: none !important;
+    }
   }
-  .education-card-right {
-    max-width: 100%;
-  }
-  .education-card-border {
-    width: 100%;
-  }
-  .education-roundedimg {
-    margin-top: 10px;
-    width: 4rem;
-    height: 4rem;
-    margin-bottom: 1rem;
-    margin-right: 0;
-  }
-  .education-text-bullets > ul {
-    max-width: 80%;
-    margin: auto;
-  }
+  .edu-card-badge  { display: none; }
+  .edu-card-name   { font-size: 0.9rem; }
+  .edu-modal-body  { padding: 22px 20px 20px; }
+  .edu-modal-school{ font-size: 1.05rem; }
 }

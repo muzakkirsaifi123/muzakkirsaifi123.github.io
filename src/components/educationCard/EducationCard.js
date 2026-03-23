@@ -1,72 +1,60 @@
-import React, {createRef, useContext} from "react";
-import {Fade, Slide} from "react-reveal";
+import React, {useContext} from "react";
 import "./EducationCard.scss";
 import StyleContext from "../../contexts/StyleContext";
 
-export default function EducationCard({school}) {
-  const imgRef = createRef();
-
-  const GetDescBullets = ({descBullets}) => {
-    return descBullets
-      ? descBullets.map((item, i) => (
-          <li key={i} className="subTitle">
-            {item}
-          </li>
-        ))
-      : null;
-  };
+export default function EducationCard({school, index, onOpen}) {
   const {isDark} = useContext(StyleContext);
+  const isEven   = index % 2 === 0;
 
-  if (!school.logo)
-    console.error(`Image of ${school.name} is missing in education section`);
   return (
-    <div>
-      <Fade left duration={1000}>
-        <div className="education-card">
+    <div
+      className={[
+        "edu-item",
+        isEven ? "edu-item--left" : "edu-item--right",
+        isDark ? "edu-item--dark" : "",
+      ].filter(Boolean).join(" ")}
+      style={{animationDelay: `${index * 0.12}s`}}
+    >
+      {/* Timeline dot */}
+      <div className="edu-dot">
+        <div className="edu-dot-ring edu-dot-ring--1" />
+        <div className="edu-dot-ring edu-dot-ring--2" />
+        <div className="edu-dot-core">
+          {school.logo
+            ? <img src={school.logo} alt={school.schoolName} />
+            : <i className="fas fa-graduation-cap" />}
+        </div>
+      </div>
+
+      {/* Compact card — click opens modal */}
+      <button
+        className={`edu-card${isDark ? " edu-card--dark" : ""}`}
+        onClick={onOpen}
+        aria-label={`View details for ${school.schoolName}`}
+      >
+        <div className="edu-card-left">
           {school.logo && (
-            <div className="education-card-left">
-              <img
-                crossOrigin={"anonymous"}
-                ref={imgRef}
-                className="education-roundedimg"
-                src={school.logo}
-                alt={school.schoolName}
-              />
+            <div className="edu-card-thumb">
+              <img src={school.logo} alt={school.schoolName} />
             </div>
           )}
-          <div className="education-card-right">
-            <h5 className="education-text-school">{school.schoolName}</h5>
-
-            <div className="education-text-details">
-              <h5
-                className={
-                  isDark
-                    ? "dark-mode education-text-subHeader"
-                    : "education-text-subHeader"
-                }
-              >
-                {school.subHeader}
-              </h5>
-              <p
-                className={`${
-                  isDark ? "dark-mode" : ""
-                } education-text-duration`}
-              >
-                {school.duration}
-              </p>
-              <p className="education-text-desc">{school.desc}</p>
-              <div className="education-text-bullets">
-                <ul>
-                  <GetDescBullets descBullets={school.descBullets} />
-                </ul>
-              </div>
-            </div>
+          <div className="edu-card-text">
+            <p className="edu-card-name">{school.schoolName}</p>
+            <p className="edu-card-degree">{school.subHeader}</p>
           </div>
         </div>
-      </Fade>
-      <Slide left duration={2000}>
-        <div className="education-card-border"></div>
-      </Slide>
+
+        <div className="edu-card-right">
+          {school.duration && (
+            <span className="edu-card-badge">
+              <i className="far fa-calendar-alt" /> {school.duration}
+            </span>
+          )}
+          <span className="edu-card-open-hint">
+            <i className="fas fa-arrow-up-right-from-square" />
+          </span>
+        </div>
+      </button>
     </div>
   );
 }

@@ -117,7 +117,7 @@ export default function GlobalParticles() {
         width:         "100%",
         height:        "100%",
         pointerEvents: "none",
-        zIndex:        0,
+        zIndex:        1,
       }}
     />
   );

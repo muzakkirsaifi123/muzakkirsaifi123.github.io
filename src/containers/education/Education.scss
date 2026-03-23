@@ -1,70 +1,54 @@
-.education-heading {
-  font-size: 56px;
-  font-weight: 400;
-}
+@import "../../_globalColor";
 
-.education-section {
-  display: flex;
-  flex-direction: column;
+/* ── Section ─────────────────────────────────────────────── */
+.edu-section {
   width: 90%;
-  padding: 20px 0px;
-  margin: 0px auto;
+  margin: 0 auto;
+  padding: 20px 0 40px;
   margin-top: 2rem;
 }
 
-.education-body {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.edu-heading {
+  font-size: 44px;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
 }
 
-.education-card-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding-top: 20px;
+/* ── Timeline wrapper ────────────────────────────────────── */
+.edu-timeline {
+  position: relative;
+  padding: 8px 0;
 }
 
-.education-lottie-div {
-  flex: 0 0 340px;
-  max-width: 340px;
+/* Vertical gradient line centered */
+.edu-timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba($buttonColor, 0.5) 8%,
+    rgba($buttonColor, 0.65) 50%,
+    rgba($buttonColor, 0.5) 92%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1380px) {
-  .education-card-container {
-    padding-top: 0px;
-  }
-  .education-heading {
-    font-size: 40px;
-  }
-  .education-text-subtitle {
-    font-size: 18px;
-    text-align: center;
-  }
-}
-
-@media (max-width: 1100px) {
-  .education-lottie-div {
-    flex: 0 0 260px;
-    max-width: 260px;
-  }
+  .edu-heading { font-size: 40px; }
 }
 
 @media (max-width: 768px) {
-  .education-card-container {
-    padding-top: 0px;
-  }
-  .education-heading {
-    font-size: 30px;
-    text-align: center;
-  }
-  .education-text-subtitle {
-    font-size: 16px;
-  }
-  .education-body {
-    flex-direction: column;
-  }
-  .education-lottie-div {
-    display: none;
+  .edu-heading { font-size: 30px; text-align: center; }
+
+  .edu-timeline-line {
+    left: 22px;
+    transform: none;
   }
 }

@@ -1,33 +1,36 @@
 @import "../../_globalColor";
 
-/* ── Frozen sticky header — animated entrance ──────────────── */
+/* ═══════════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════════ */
 @keyframes headerSlideDown {
   from { transform: translateY(-100%); opacity: 0; }
   to   { transform: translateY(0);     opacity: 1; }
 }
-
 @keyframes borderTravel {
   0%   { background-position: 0% center; }
   100% { background-position: 200% center; }
 }
+@keyframes navItemPop {
+  from { opacity: 0; transform: translateY(-10px) scale(0.88); }
+  to   { opacity: 1; transform: translateY(0)      scale(1);   }
+}
 
-
+/* ═══════════════════════════════════════════════════════════
+   STICKY WRAPPER
+═══════════════════════════════════════════════════════════ */
 .header-sticky {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
   animation: headerSlideDown 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) both;
 }
 
-/* animated gradient bottom border */
+/* Animated gradient bottom border */
 .header-sticky::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 2px;
   background: linear-gradient(
     90deg,
@@ -39,111 +42,46 @@
   );
   background-size: 200% 100%;
   animation: borderTravel 3s linear infinite;
+  pointer-events: none;
 }
 
-/* header */
+/* ═══════════════════════════════════════════════════════════
+   HEADER BAR
+═══════════════════════════════════════════════════════════ */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  transition: background 0.3s ease;
+}
 
 .dark-menu {
-  background-color: rgba(23, 28, 40, 0.88) !important;
+  background: rgba(23, 28, 40, 0.88) !important;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   color: $textColorDark;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 
-.dark-menu li a {
-  color: $textColorDark !important;
-}
-
-.dark-menu li a:hover {
-  background-color: transparent !important;
-  color: $buttonHover !important;
-}
-
-.header {
-  background-color: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  max-width: 100%;
-  padding: 15px 20px;
-  margin: 0px auto;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-}
-
-.grey-color {
-  color: $subTitle;
-}
-
-.header li a {
-  display: block;
-  padding: 15px 20px;
-  color: $textColor;
-  text-decoration: none;
-  position: relative;
-  transition: color 0.25s ease;
-}
-
-.header li a::after {
-  content: "";
-  position: absolute;
-  bottom: 8px;
-  left: 20px;
-  right: 20px;
-  height: 2px;
-  background: linear-gradient(to right, $buttonColor, $buttonHover);
-  border-radius: 2px;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.25s ease;
-}
-
-.header li a:hover,
-.header li a.active {
-  color: $buttonColor;
-  background-color: transparent;
-}
-
-.header li a:hover::after,
-.header li a.active::after {
-  transform: scaleX(1);
-}
-
-.dark-menu li a.active {
-  color: $buttonHover !important;
-}
-
-.header li a.active::after {
-  background: linear-gradient(to right, $buttonColor, $buttonHover);
-}
-
-.header .menu-btn:hover {
-  background-color: $headerHoverBG;
-}
-
+/* ── Logo ── */
 .header .logo {
-  display: block;
-  flex: none;
-  float: left;
   font-size: 1.5em;
   text-decoration: none;
-  margin-top: 10px;
   line-height: normal;
+  flex-shrink: 0;
 }
+
+.grey-color { color: $subTitle; }
 
 .header .logo-name {
   font-family: "Agustina Regular";
   font-weight: bold;
-  font-variant-ligatures: no-common-ligatures;
-  -webkit-font-variant-ligatures: no-common-ligatures;
-  padding: 0 10px;
+  padding: 0 8px;
   background: linear-gradient(135deg, $buttonColor, $buttonHover, $buttonColor);
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -152,115 +90,196 @@
   animation: borderTravel 4s linear infinite;
 }
 
-/* menu */
-
-.header .menu {
-  clear: both;
-  max-height: 0;
-  transition: max-height 0.2s ease-out;
+/* ── Right controls: toggle + hamburger ── */
+.hdr-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-/* menu icon */
-
-.header .menu-icon {
+/* ── Hamburger button ── */
+.hdr-menu-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba($buttonColor, 0.25);
+  background: rgba($buttonColor, 0.07);
   cursor: pointer;
-  display: inline-block;
-  float: right;
-  padding: 28px 20px;
-  position: relative;
-  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  padding: 0;
+
+  &:hover {
+    background: rgba($buttonColor, 0.14);
+    border-color: rgba($buttonColor, 0.45);
+    transform: scale(1.06);
+  }
+
+  &--open {
+    background: rgba($buttonColor, 0.18);
+    border-color: rgba($buttonColor, 0.5);
+  }
+
+  &--dark { border-color: rgba($buttonColor, 0.35); }
 }
 
-.header .menu-icon .navicon {
-  background: $iconBackground;
+.hdr-bar {
   display: block;
-  height: 2px;
-  position: relative;
-  transition: background 0.2s ease-out;
   width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: $buttonColor;
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
+              opacity 0.25s ease,
+              width 0.25s ease;
 }
 
-.header .menu-icon .navicon-dark {
-  background: $textColorDark;
+/* Animated X when open */
+.hdr-menu-btn--open {
+  .hdr-bar--1 { transform: translateY(7px) rotate(45deg); }
+  .hdr-bar--2 { opacity: 0; width: 0; }
+  .hdr-bar--3 { transform: translateY(-7px) rotate(-45deg); }
 }
 
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-  background: $iconBackground;
-  content: "";
-  display: block;
-  height: 100%;
+/* ═══════════════════════════════════════════════════════════
+   VERTICAL RIGHT-SIDE NAV PANEL
+═══════════════════════════════════════════════════════════ */
+@keyframes panelSlideIn {
+  from { opacity: 0; transform: translateX(20px) scale(0.94); }
+  to   { opacity: 1; transform: translateX(0)    scale(1);    }
+}
+
+.hdr-panel {
+  position: fixed;
+  top: 70px;          /* just below header bar */
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 8px;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba($buttonColor, 0.2);
+  border-radius: 18px;
+  box-shadow:
+    0 16px 48px rgba(0,0,0,0.14),
+    0 0 0 1px rgba($buttonColor, 0.08) inset;
+  animation: panelSlideIn 0.32s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  z-index: 999;
+  min-width: 0;
+
+  &--dark {
+    background: rgba(16, 14, 28, 0.94);
+    border-color: rgba($buttonColor, 0.28);
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.5),
+      0 0 0 1px rgba($buttonColor, 0.12) inset;
+  }
+}
+
+/* ── Individual nav item — icon only, label as tooltip ── */
+.hdr-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 9px;
+  border-radius: 12px;
+  text-decoration: none;
+  position: relative;
+  transition: background 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  animation: navItemPop 0.38s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+
+  &:hover {
+    background: rgba($buttonColor, 0.1);
+    transform: scale(1.08);
+
+    .hdr-nav-label { opacity: 1; pointer-events: none; transform: translateX(0); }
+  }
+
+  &--active {
+    background: rgba($buttonColor, 0.13);
+    .hdr-nav-icon { background: rgba($buttonColor, 0.22); }
+  }
+}
+
+.hdr-panel--dark .hdr-nav-item {
+  &:hover     { background: rgba($buttonColor, 0.14); }
+  &--active   { background: rgba($buttonColor, 0.18); }
+}
+
+.hdr-nav-icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: rgba($buttonColor, 0.09);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+
+  i { font-size: 0.75rem; color: $buttonColor; }
+}
+
+.hdr-nav-item--active .hdr-nav-icon { background: rgba($buttonColor, 0.2); }
+
+/* Tooltip label — appears to the left on hover */
+.hdr-nav-label {
   position: absolute;
-  transition: all 0.2s ease-out;
-  width: 100%;
-}
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateX(8px) translateY(-50%);
+  background: rgba(0,0,0,0.82);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  transform: translateX(8px) translateY(-50%);
+  z-index: 10;
 
-.header .menu-icon .navicon-dark:before,
-.header .menu-icon .navicon-dark:after {
-  background: $textColorDark !important;
-  content: "";
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all 0.2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-  top: 5px;
-}
-
-.header .menu-icon .navicon:after {
-  top: -5px;
-}
-
-/* menu btn */
-
-.header .menu-btn {
-  display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-  max-height: 486px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-  background: transparent !important;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-  transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-  transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-  top: 0;
-}
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-  .header li {
-    float: left;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .header .menu {
-    max-height: none;
-  }
-  .header .menu-icon {
-    display: none;
+  /* tiny arrow pointing right */
+  &::after {
+    content: "";
+    position: absolute;
+    right: -5px; top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-right: none;
+    border-left-color: rgba(0,0,0,0.82);
   }
 }
-@media (max-width: 960px) and (min-width: 768px) {
-  .header {
-    font-size: 12px;
+
+.hdr-nav-item:hover .hdr-nav-label {
+  opacity: 1;
+  transform: translateX(0) translateY(-50%);
+}
+
+.hdr-panel--dark .hdr-nav-label {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  &::after { border-left-color: rgba(255,255,255,0.15); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hdr-panel {
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    flex-direction: row;
+    border-radius: 40px;
+    padding: 8px 10px;
   }
+
+  .hdr-nav-label { display: none; }
+  .hdr-nav-icon  { width: 28px; height: 28px; border-radius: 8px; }
 }
