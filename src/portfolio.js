@@ -5,6 +5,20 @@
 import emoji from "react-easy-emoji";
 import splashAnimation from "./assets/lottie/splashAnimation"; // Rename to your file name for custom animation
 
+// Maintenance / "Coming Soon" mode
+// Flip `enabled` to false (and redeploy) the moment the real site should go live again.
+
+const maintenanceMode = {
+  enabled: true, // set false to show the real portfolio again
+  heading: "We're Building Something Awesome",
+  messages: [
+    "Deploying new features...",
+    "Polishing the pipelines...",
+    "Almost ready for launch...",
+    "Check back soon!"
+  ]
+};
+
 // Splash Screen
 
 const splashScreen = {
@@ -615,6 +629,7 @@ export {
   illustration,
   greeting,
   socialMediaLinks,
+  maintenanceMode,
   splashScreen,
   skillsSection,
   educationInfo,

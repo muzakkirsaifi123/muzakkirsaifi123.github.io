@@ -4,7 +4,9 @@ import Main from "./containers/Main";
 import Admin from "./containers/admin/Admin";
 import OwnAdmin from "./containers/ownadmin/OwnAdmin";
 import SectionPage from "./containers/sectionPage/SectionPage";
+import ComingSoon from "./containers/comingSoon/ComingSoon";
 import GlobalParticles from "./components/globalParticles/GlobalParticles";
+import {maintenanceMode} from "./portfolio";
 
 function getSection(hash) {
   // Match #/skills, #/experience, #/projects, #/achievements, #/education, #/contact
@@ -27,6 +29,8 @@ function App() {
 
   if (isAdmin) return <Admin />;
   if (isOwnAdmin) return <OwnAdmin />;
+
+  if (maintenanceMode.enabled) return <ComingSoon />;
 
   const section = getSection(hash);
   return (
