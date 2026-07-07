@@ -6,9 +6,10 @@ export default function socialMedia() {
   if (!socialMediaLinks.display) {
     return null;
   }
+  const show = socialMediaLinks.show || {};
   return (
     <div className="social-media-div">
-      {socialMediaLinks.github ? (
+      {show.github && socialMediaLinks.github ? (
         <a
           href={socialMediaLinks.github}
           className="icon-button github"
@@ -20,7 +21,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.linkedin ? (
+      {show.linkedin && socialMediaLinks.linkedin ? (
         <a
           href={socialMediaLinks.linkedin}
           className="icon-button linkedin"
@@ -32,7 +33,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.gmail ? (
+      {show.gmail && socialMediaLinks.gmail ? (
         <a
           href={`mailto:${socialMediaLinks.gmail}`}
           className="icon-button google"
@@ -44,7 +45,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.gitlab ? (
+      {show.gitlab && socialMediaLinks.gitlab ? (
         <a
           href={socialMediaLinks.gitlab}
           className="icon-button gitlab"
@@ -56,7 +57,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.facebook ? (
+      {show.facebook && socialMediaLinks.facebook ? (
         <a
           href={socialMediaLinks.facebook}
           className="icon-button facebook"
@@ -68,7 +69,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.instagram ? (
+      {show.instagram && socialMediaLinks.instagram ? (
         <a
           href={socialMediaLinks.instagram}
           className="icon-button instagram"
@@ -80,7 +81,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.twitter ? (
+      {show.twitter && socialMediaLinks.twitter ? (
         <a
           href={socialMediaLinks.twitter}
           className="icon-button twitter"
@@ -92,7 +93,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.medium ? (
+      {show.medium && socialMediaLinks.medium ? (
         <a
           href={socialMediaLinks.medium}
           className="icon-button medium"
@@ -104,7 +105,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.stackoverflow ? (
+      {show.stackoverflow && socialMediaLinks.stackoverflow ? (
         <a
           href={socialMediaLinks.stackoverflow}
           className="icon-button stack-overflow"
@@ -116,7 +117,7 @@ export default function socialMedia() {
         </a>
       ) : null}
 
-      {socialMediaLinks.kaggle ? (
+      {show.kaggle && socialMediaLinks.kaggle ? (
         <a
           href={socialMediaLinks.kaggle}
           className="icon-button kaggle"

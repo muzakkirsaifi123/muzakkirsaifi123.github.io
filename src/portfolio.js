@@ -50,18 +50,38 @@ const greeting = {
 };
 
 // Social Media Links
+//
+// Each link has a matching flag in `show` below — flip any one of them to
+// false to hide just that icon (the URL can stay filled in, untouched).
 
 const socialMediaLinks = {
+  display: true, // master switch for the whole social icon row
+
   github: "https://github.com/muzakkirsaifi123",
   linkedin: "https://www.linkedin.com/in/mohd-muzakkir-s-b89755175/",
   gmail: "muzakkirsaifi8@gmail.com",
-  // gitlab: "https://gitlab.com/saadpasta",
-  // facebook: "https://www.facebook.com/saad.pasta7",
-  // medium: "https://medium.com/@saadpasta",
-  // stackoverflow: "https://stackoverflow.com/users/10422806/saad-pasta",
-  // Instagram, Twitter and Kaggle are also supported in the links!
-  // To customize icons and social links, tweak src/components/SocialMedia
-  display: true // Set true to display this section, defaults to false
+  gitlab: "",
+  facebook: "",
+  medium: "",
+  stackoverflow: "",
+  instagram: "",
+  twitter: "",
+  kaggle: "",
+
+  // true = show this icon, false = hide it. No need to delete/comment
+  // the URL above — just flip the switch here.
+  show: {
+    github: true,
+    linkedin: false,
+    gmail: true,
+    gitlab: false,
+    facebook: false,
+    medium: false,
+    stackoverflow: false,
+    instagram: false,
+    twitter: false,
+    kaggle: false
+  }
 };
 
 // Skills Section
