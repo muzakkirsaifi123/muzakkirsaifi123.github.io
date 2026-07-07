@@ -24,7 +24,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider node fetch.js && react-scripts start",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && node fetch.js && react-scripts start",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && node fetch.js && react-scripts build",
     "deploy": "gh-pages -b gh-pages -d build",
     "test": "react-scripts test",

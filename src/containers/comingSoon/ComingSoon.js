@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./ComingSoon.css";
-import {greeting, socialMediaLinks, maintenanceMode} from "../../portfolio";
+import {greeting, maintenanceMode} from "../../portfolio";
 
 /* Same floating DevOps-icon backdrop used on the splash screen, kept here
    so this page still feels like part of the same site. */
@@ -109,42 +109,8 @@ export default function ComingSoon() {
 
         <p className="cs-subtext">
           The portfolio is getting a fresh coat of paint. Please check back
-          soon &mdash; in the meantime, feel free to reach out.
+          soon.
         </p>
-
-        <div className="cs-social">
-          {socialMediaLinks.github && (
-            <a
-              href={socialMediaLinks.github}
-              className="cs-social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <i className="fab fa-github" />
-            </a>
-          )}
-          {socialMediaLinks.linkedin && (
-            <a
-              href={socialMediaLinks.linkedin}
-              className="cs-social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <i className="fab fa-linkedin-in" />
-            </a>
-          )}
-          {socialMediaLinks.gmail && (
-            <a
-              href={`mailto:${socialMediaLinks.gmail}`}
-              className="cs-social-link"
-              aria-label="Email"
-            >
-              <i className="fas fa-envelope" />
-            </a>
-          )}
-        </div>
       </div>
     </div>
   );

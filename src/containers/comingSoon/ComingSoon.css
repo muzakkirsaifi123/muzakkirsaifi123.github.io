@@ -197,36 +197,7 @@
   font-size: 14px;
   line-height: 1.6;
   color: #8a93a6;
-  margin: 0 0 28px;
-}
-
-.cs-social {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.cs-social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #e4e6eb;
-  font-size: 18px;
-  text-decoration: none;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.cs-social-link:hover {
-  transform: translateY(-3px);
-  background: rgba(168, 85, 247, 0.18);
-  border-color: rgba(168, 85, 247, 0.5);
-  color: #fff;
+  margin: 0;
 }
 
 @media (max-width: 480px) {
