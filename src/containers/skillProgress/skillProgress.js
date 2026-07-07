@@ -1,19 +1,23 @@
-import React, {useRef, useState, useEffect} from "react";
+import React, {useContext, useRef, useState, useEffect} from "react";
 import "./Progress.scss";
 import {techStack} from "../../portfolio";
 import {Fade} from "react-reveal";
+import StyleContext from "../../contexts/StyleContext";
 
 const RADIUS = 52;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS; // ≈ 326.7
 
-// Color palette cycling through skills
+// Color palette — shades within the site's own purple → blue gradient
+// family (matching the hero, splash screen and experience path)
+// instead of an unrelated rainbow, so this section reads as part of
+// the same app rather than a clashing add-on.
 const COLORS = [
-  {a: "#8c43ce", b: "#c084fc", glow: "rgba(140,67,206,0.55)"},
-  {a: "#6366f1", b: "#a78bfa", glow: "rgba(99,102,241,0.55)"},
-  {a: "#06b6d4", b: "#67e8f9", glow: "rgba(6,182,212,0.5)"},
-  {a: "#10b981", b: "#6ee7b7", glow: "rgba(16,185,129,0.5)"},
-  {a: "#f59e0b", b: "#fcd34d", glow: "rgba(245,158,11,0.5)"},
-  {a: "#ec4899", b: "#f9a8d4", glow: "rgba(236,72,153,0.5)"}
+  {a: "#6a11cb", b: "#9b59b6", glow: "rgba(106,17,203,0.5)"},
+  {a: "#7b2ff7", b: "#a78bfa", glow: "rgba(123,47,247,0.5)"},
+  {a: "#8c43ce", b: "#c084fc", glow: "rgba(140,67,206,0.5)"},
+  {a: "#5b21b6", b: "#818cf8", glow: "rgba(91,33,182,0.5)"},
+  {a: "#4f46e5", b: "#38bdf8", glow: "rgba(79,70,229,0.5)"},
+  {a: "#2575fc", b: "#67e8f9", glow: "rgba(37,117,252,0.5)"}
 ];
 
 function levelLabel(pct) {
@@ -24,10 +28,12 @@ function levelLabel(pct) {
   return "Learning";
 }
 
-function RingCard({exp, index, isVisible}) {
+function RingCard({exp, index, isVisible, isDark}) {
   const pct  = parseInt(String(exp.progressPercentage), 10) || 70;
   const col  = COLORS[index % COLORS.length];
   const gradId = `grad-${index}`;
+  const trackColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(85,25,139,0.08)";
+  const levelTextColor = isDark ? "rgba(226,232,240,0.55)" : "rgba(51,51,51,0.55)";
 
   // stroke-dashoffset: CIRCUMFERENCE when empty, target offset when filled
   const targetOffset = CIRCUMFERENCE * (1 - pct / 100);
@@ -62,7 +68,7 @@ function RingCard({exp, index, isVisible}) {
         <circle
           cx="65" cy="65" r={RADIUS}
           fill="none"
-          stroke="rgba(255,255,255,0.06)"
+          stroke={trackColor}
           strokeWidth="8"
         />
 
@@ -88,7 +94,7 @@ function RingCard({exp, index, isVisible}) {
         <text x="65" y="60" textAnchor="middle" className="ring-pct-text" fill={col.b}>
           {isVisible ? `${pct}%` : ""}
         </text>
-        <text x="65" y="76" textAnchor="middle" className="ring-level-text" fill="rgba(226,232,240,0.5)">
+        <text x="65" y="76" textAnchor="middle" className="ring-level-text" fill={levelTextColor}>
           {levelLabel(pct)}
         </text>
       </svg>
@@ -113,6 +119,7 @@ function RingCard({exp, index, isVisible}) {
 }
 
 export default function StackProgress() {
+  const {isDark} = useContext(StyleContext);
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -134,10 +141,10 @@ export default function StackProgress() {
     <div ref={sectionRef}>
       <Fade bottom duration={1000} distance="20px">
         <div className="prof-section">
-          <h1 className="prof-heading">Proficiency</h1>
+          <h1 className={isDark ? "dark-mode prof-heading" : "prof-heading"}>Proficiency</h1>
           <div className="ring-grid">
             {techStack.experience.map((exp, i) => (
-              <RingCard key={i} exp={exp} index={i} isVisible={isVisible} />
+              <RingCard key={i} exp={exp} index={i} isVisible={isVisible} isDark={isDark} />
             ))}
           </div>
         </div>

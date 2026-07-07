@@ -36,12 +36,28 @@
   justify-content: space-between;
   padding: 14px 28px;
   background: transparent;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Once scrolled, whatever content passes underneath the fixed header
+   would otherwise show straight through it (it's transparent at rest
+   by design, for the hero section) — give it a solid, blurred
+   background so it stays legible and its buttons stay easy to hit. */
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.08);
 }
 
 .dark-menu {
   background: transparent !important;
   color: $textColorDark;
+}
+
+.dark-menu.header--scrolled {
+  background: rgba(16, 14, 28, 0.85) !important;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
 }
 
 /* ── Logo ── */

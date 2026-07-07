@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import "./AchievementCard.scss";
 
 export default function AchievementCard({cardInfo, isDark}) {
-  function openUrlInNewTab(url, name) {
+  const [pulseIdx, setPulseIdx] = useState(null);
+
+  function openUrlInNewTab(url, name, i) {
+    // Brief pulse for click feedback — previously nothing visually
+    // acknowledged the click before the new tab opened.
+    setPulseIdx(i);
+    setTimeout(() => setPulseIdx(null), 350);
     if (!url) {
       console.log(`URL for ${name} not found`);
       return;
@@ -33,10 +39,12 @@ export default function AchievementCard({cardInfo, isDark}) {
           return (
             <span
               key={i}
-              className={
-                isDark ? "dark-mode certificate-tag" : "certificate-tag"
-              }
-              onClick={() => openUrlInNewTab(v.url, v.name)}
+              className={[
+                "certificate-tag",
+                isDark ? "dark-mode" : "",
+                pulseIdx === i ? "certificate-tag--pulse" : "",
+              ].filter(Boolean).join(" ")}
+              onClick={() => openUrlInNewTab(v.url, v.name, i)}
             >
               {v.name}
             </span>

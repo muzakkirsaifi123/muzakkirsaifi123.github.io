@@ -33,9 +33,21 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [transition, setTransition]       = useState(null);
+  const [scrolled, setScrolled]           = useState(false);
   const pendingSectionRef = useRef(null);
   const panelRef          = useRef(null);
   const btnRef            = useRef(null);
+
+  /* Solid/blurred background once the page is scrolled — the header
+     is transparent at the very top by design, but with no scrolled
+     state it stayed transparent forever, so whatever content scrolls
+     underneath the fixed header showed straight through it. */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, {passive: true});
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   /* Active section via IntersectionObserver */
   useEffect(() => {
@@ -73,6 +85,15 @@ function Header() {
     return () => document.removeEventListener("keydown", handler);
   }, []);
 
+  /* Logo click — go home: drop out of any section page and scroll
+     back to the top, without a jarring full-page reload. */
+  const goHome = useCallback(e => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (window.location.hash) window.location.hash = "";
+    window.scrollTo({top: 0, behavior: "smooth"});
+  }, []);
+
   const handleNavClick = useCallback((e, sectionId) => {
     e.preventDefault();
     const info = SECTION_LOTTIE[sectionId];
@@ -107,9 +128,15 @@ function Header() {
       )}
 
       <div className="header-sticky">
-        <header className={isDark ? "dark-menu header" : "header"}>
-          {/* Logo */}
-          <a href="/" className="logo">
+        <header
+          className={[
+            "header",
+            isDark ? "dark-menu" : "",
+            scrolled ? "header--scrolled" : "",
+          ].filter(Boolean).join(" ")}
+        >
+          {/* Logo — click to go home */}
+          <a href="/" className="logo" onClick={goHome} aria-label="Go to home">
             <span className="grey-color">&lt;</span>
             <span className="logo-name">{greeting.username}</span>
             <span className="grey-color">/&gt;</span>

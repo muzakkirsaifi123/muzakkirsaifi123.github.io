@@ -36,7 +36,6 @@ jobs:
           CI: false
           NODE_OPTIONS: --openssl-legacy-provider
           REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }}
-          REACT_APP_ADMIN_PASSWORD: ${{ secrets.REACT_APP_ADMIN_PASSWORD }}
         run: npm run build
 
       - name: Upload Pages artifact

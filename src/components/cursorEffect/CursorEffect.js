@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useCallback} from "react";
 import "./CursorEffect.scss";
 
 const COLORS = ["#8c43ce", "#55198b", "#aaa5ff", "#c8c4ff", "#e0b3ff"];
+const INTERACTIVE_SELECTOR = "a, button, [role='button'], input, textarea, select, summary, [onclick], [tabindex]:not([tabindex='-1'])";
 
 export default function CursorEffect() {
   const cursorRingRef = useRef(null);
@@ -80,15 +81,49 @@ export default function CursorEffect() {
       if (cursorDotRef.current) cursorDotRef.current.style.opacity = "0";
     };
 
+    /* Enlarge the ring over anything clickable — was previously
+       attempted with a CSS sibling selector (`a:hover ~ .cursor-ring`)
+       which can only ever match a link/button that happens to be a
+       later DOM sibling of the ring itself, so it silently never
+       matched real content anywhere on the page. Tracked in JS
+       instead, so it actually works site-wide. */
+    const onOver = e => {
+      if (cursorRingRef.current && e.target.closest && e.target.closest(INTERACTIVE_SELECTOR)) {
+        cursorRingRef.current.classList.add("cursor-ring--active");
+      }
+    };
+    const onOut = e => {
+      if (cursorRingRef.current && e.target.closest && e.target.closest(INTERACTIVE_SELECTOR)) {
+        cursorRingRef.current.classList.remove("cursor-ring--active");
+      }
+    };
+
+    /* A quick expanding ripple on every click, for tactile feedback
+       wherever the user clicks — not just on the ring/dot trail. */
+    const onClick = e => {
+      const el = document.createElement("div");
+      el.className = "cursor-ripple";
+      el.style.left = `${e.clientX}px`;
+      el.style.top = `${e.clientY}px`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 550);
+    };
+
     document.addEventListener("mousemove", onMove);
     document.addEventListener("mouseenter", onEnter);
     document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
+    document.addEventListener("click", onClick);
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseenter", onEnter);
       document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
+      document.removeEventListener("click", onClick);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [createSparkle]);

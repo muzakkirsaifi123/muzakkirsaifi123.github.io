@@ -1,43 +1,43 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "15da432e7d6db2066c427272e542a245",
+    "revision": "27c2b59131fd46c22bd5d2271fda9a6f",
     "url": "/index.html"
   },
   {
-    "revision": "e1baf2206f9f862f1d4c",
+    "revision": "c5bdc8a0e6dafbaa795d",
     "url": "/static/css/3.df879eac.chunk.css"
   },
   {
-    "revision": "f097be8cce845b0de250",
+    "revision": "77e22a0b6a85a8699fea",
     "url": "/static/css/4.d7ceb645.chunk.css"
   },
   {
-    "revision": "fa593232e6d2fffe9eb4",
-    "url": "/static/css/main.8993dc51.chunk.css"
+    "revision": "8699d117998f81b5bb0f",
+    "url": "/static/css/main.d48fe04a.chunk.css"
   },
   {
-    "revision": "24f49055d06ee3f7b966",
-    "url": "/static/js/2.cee10b2a.chunk.js"
+    "revision": "137752d9c6a0b617e5b9",
+    "url": "/static/js/2.cd54820a.chunk.js"
   },
   {
     "revision": "d4d701abc30fcef5f714584a64df6e82",
-    "url": "/static/js/2.cee10b2a.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.cd54820a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e1baf2206f9f862f1d4c",
-    "url": "/static/js/3.29461411.chunk.js"
+    "revision": "c5bdc8a0e6dafbaa795d",
+    "url": "/static/js/3.f41bf3a8.chunk.js"
   },
   {
-    "revision": "f097be8cce845b0de250",
-    "url": "/static/js/4.f5af763f.chunk.js"
+    "revision": "77e22a0b6a85a8699fea",
+    "url": "/static/js/4.ad996a40.chunk.js"
   },
   {
-    "revision": "fa593232e6d2fffe9eb4",
-    "url": "/static/js/main.74960ad0.chunk.js"
+    "revision": "8699d117998f81b5bb0f",
+    "url": "/static/js/main.d8c43ac3.chunk.js"
   },
   {
-    "revision": "fe356d42a63e6b58c7b3",
-    "url": "/static/js/runtime-main.fb16a25c.js"
+    "revision": "4508a7dd8c54a85610e5",
+    "url": "/static/js/runtime-main.95738661.js"
   },
   {
     "revision": "2fcc1a93f407e62e4c2e60ab8e722f4f",
@@ -66,10 +66,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "11c1bbe87e782ced68bf9f063f3fbb43",
     "url": "/static/media/badge-devops-expert.11c1bbe8.webp"
-  },
-  {
-    "revision": "51cf7192327488da3d2a171280680c16",
-    "url": "/static/media/contactMailDark.51cf7192.svg"
   },
   {
     "revision": "59389695208d7454c6607bed51ed4316",

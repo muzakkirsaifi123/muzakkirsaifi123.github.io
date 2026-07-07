@@ -45,11 +45,6 @@ export default function EducationCard({school, index, onOpen}) {
         </div>
 
         <div className="edu-card-right">
-          {school.duration && (
-            <span className="edu-card-badge">
-              <i className="far fa-calendar-alt" /> {school.duration}
-            </span>
-          )}
           <span className="edu-card-open-hint">
             <i className="fas fa-arrow-up-right-from-square" />
           </span>

@@ -65,6 +65,11 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.certificate-card:hover .certificate-image-div .card-image {
+  transform: scale(1.08);
 }
 .achievement-cards-div {
   display: grid;
@@ -96,4 +101,14 @@
 }
 span.certificate-tag:hover {
   background: $buttonHover;
+}
+
+@keyframes certificateTagPulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.86); }
+  100% { transform: scale(1); }
+}
+
+.certificate-tag--pulse {
+  animation: certificateTagPulse 0.35s ease;
 }

@@ -91,8 +91,9 @@ function Particles({isDark}) {
 export default function Contact() {
   const {isDark} = useContext(StyleContext);
 
+  const show = socialMediaLinks.show || {};
   const socialLinks = Object.entries(SOCIAL_ICONS)
-    .filter(([key]) => socialMediaLinks[key])
+    .filter(([key]) => socialMediaLinks[key] && show[key])
     .map(([key, meta]) => ({
       ...meta,
       href: key === "gmail"

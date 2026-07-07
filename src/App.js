@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./App.scss";
 import Main from "./containers/Main";
-import Admin from "./containers/admin/Admin";
-import OwnAdmin from "./containers/ownadmin/OwnAdmin";
 import SectionPage from "./containers/sectionPage/SectionPage";
 import ComingSoon from "./containers/comingSoon/ComingSoon";
 import GlobalParticles from "./components/globalParticles/GlobalParticles";
@@ -15,10 +13,6 @@ function getSection(hash) {
 }
 
 function App() {
-  const path = window.location.pathname;
-  const search = new URLSearchParams(window.location.search);
-  const isAdmin = path === "/admin" || path.endsWith("/admin") || search.has("admin");
-  const isOwnAdmin = path === "/ownadmin" || path.endsWith("/ownadmin") || search.has("ownadmin");
   const [hash, setHash] = useState(window.location.hash);
 
   useEffect(() => {
@@ -26,9 +20,6 @@ function App() {
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
-
-  if (isAdmin) return <Admin />;
-  if (isOwnAdmin) return <OwnAdmin />;
 
   if (maintenanceMode.enabled) return <ComingSoon />;
 

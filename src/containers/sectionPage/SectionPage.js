@@ -87,6 +87,7 @@ export default function SectionPage({section}) {
       <StyleProvider value={{isDark, changeTheme: () => setIsDark(!isDark)}}>
         {/* ── Same header as home page ── */}
         <Header />
+        <div className="header-spacer" aria-hidden="true" />
 
         {/* ── Hero ── */}
         <div className={`sp-hero ${visible ? "sp-hero--visible" : ""}`}>

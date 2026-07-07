@@ -46,13 +46,6 @@ function EduModal({school, isDark, onClose}) {
             </div>
           </div>
 
-          {/* Duration */}
-          {school.duration && (
-            <span className="edu-modal-duration">
-              <i className="far fa-calendar-alt" /> {school.duration}
-            </span>
-          )}
-
           {/* Divider */}
           <div className="edu-modal-divider" />
 

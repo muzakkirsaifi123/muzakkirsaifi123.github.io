@@ -36,16 +36,40 @@
     margin-left: -18px;
     margin-top: -18px;
     will-change: transform;
-    transition: opacity 0.2s, width 0.2s, height 0.2s, border-color 0.2s;
+    transition: opacity 0.2s, width 0.2s, height 0.2s, margin 0.2s, border-color 0.2s, background 0.2s;
   }
 
-  /* Ring enlarges when hovering interactive elements */
-  a:hover ~ .cursor-ring,
-  button:hover ~ .cursor-ring {
-    width: 48px;
-    height: 48px;
-    border-color: rgba(140, 67, 206, 0.8);
+  /* Ring enlarges over anything clickable (tracked in JS — see
+     CursorEffect.js — a CSS sibling selector can't reach arbitrary
+     content elsewhere on the page). */
+  .cursor-ring--active {
+    width: 54px;
+    height: 54px;
+    margin-left: -27px;
+    margin-top: -27px;
+    border-color: rgba(140, 67, 206, 0.85);
+    background: rgba(140, 67, 206, 0.08);
   }
+}
+
+/* Expanding ripple burst on every click, wherever it lands */
+.cursor-ripple {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(140, 67, 206, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99996;
+  transform: translate(-50%, -50%);
+  animation: cursor-ripple-burst 0.55s ease-out forwards;
+}
+
+@keyframes cursor-ripple-burst {
+  0%   { width: 10px; height: 10px; opacity: 0.9; }
+  100% { width: 64px; height: 64px; opacity: 0; }
 }
 
 /* Sparkle particles */

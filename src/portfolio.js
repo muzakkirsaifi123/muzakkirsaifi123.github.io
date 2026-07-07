@@ -71,7 +71,7 @@ const socialMediaLinks = {
   // true = show this icon, false = hide it. No need to delete/comment
   // the URL above — just flip the switch here.
   show: {
-    github: true,
+    github: false,
     linkedin: false,
     gmail: true,
     gitlab: false,
@@ -111,7 +111,7 @@ const skillsSection = {
     },
     {
       skillName: "GCP",
-      fontAwesomeClassname: "devicon-googlecloud-original colored"
+      fontAwesomeClassname: "devicon-googlecloud-plain colored"
     },
     {
       skillName: "Docker",
@@ -123,15 +123,15 @@ const skillsSection = {
     },
     {
       skillName: "Terraform",
-      fontAwesomeClassname: "devicon-terraform-original colored"
+      fontAwesomeClassname: "devicon-terraform-plain colored"
     },
     {
       skillName: "Ansible",
-      fontAwesomeClassname: "devicon-ansible-original colored"
+      fontAwesomeClassname: "devicon-ansible-plain colored"
     },
     {
       skillName: "Python",
-      fontAwesomeClassname: "devicon-python-original colored"
+      fontAwesomeClassname: "devicon-python-plain colored"
     },
     {
       skillName: "Bash",
@@ -147,11 +147,11 @@ const skillsSection = {
     },
     {
       skillName: "GitLab CI",
-      fontAwesomeClassname: "devicon-gitlab-original colored"
+      fontAwesomeClassname: "devicon-gitlab-plain colored"
     },
     {
       skillName: "Jenkins",
-      fontAwesomeClassname: "devicon-jenkins-original colored"
+      fontAwesomeClassname: "devicon-jenkins-plain colored"
     },
     {
       skillName: "Helm",
@@ -159,7 +159,7 @@ const skillsSection = {
     },
     {
       skillName: "ArgoCD",
-      fontAwesomeClassname: "devicon-argocd-original colored"
+      fontAwesomeClassname: "devicon-argocd-plain colored"
     },
     {
       skillName: "Prometheus",
@@ -167,7 +167,7 @@ const skillsSection = {
     },
     {
       skillName: "Grafana",
-      fontAwesomeClassname: "devicon-grafana-original colored"
+      fontAwesomeClassname: "devicon-grafana-plain colored"
     },
     {
       skillName: "Linux",
@@ -191,7 +191,7 @@ const skillsSection = {
     },
     {
       skillName: "Terraform CDK",
-      fontAwesomeClassname: "devicon-terraform-original colored"
+      fontAwesomeClassname: "devicon-terraform-plain colored"
     },
     {
       skillName: "DevSecOps",
@@ -530,120 +530,6 @@ const twitterDetails = {
 };
 
 const isHireable = false; // Set false if you are not looking for a job. Also isHireable will be display as Open for opportunities: Yes/No in the GitHub footer
-
-// ── OwnAdmin live overrides ────────────────────────────────────────────────
-try {
-  const raw = localStorage.getItem("ownadmin_overrides");
-  if (raw) {
-    const ov = JSON.parse(raw);
-    if (ov.greeting) {
-      const {heroStats, ...greetRest} = ov.greeting;
-      Object.assign(greeting, greetRest);
-      if (Array.isArray(heroStats) && heroStats.length) greeting.heroStats = heroStats;
-      // Guard: if subTitle got corrupted to [object Object], reset it
-      if (typeof greeting.subTitle !== "string" ||
-          greeting.subTitle.startsWith("[object")) {
-        greeting.subTitle = "DevOps enthusiast committed to streamlining workflows and fostering collaboration for efficient software delivery.";
-      }
-    }
-    if (ov.socialMediaLinks) Object.assign(socialMediaLinks, ov.socialMediaLinks);
-    if (ov.contactInfo)      Object.assign(contactInfo, ov.contactInfo);
-
-    if (ov.skillsSection) {
-      // Sanitize skill bullets — strip any [object Object] remnants from old saves
-      if (Array.isArray(ov.skillsSection.skills)) {
-        ov.skillsSection.skills = ov.skillsSection.skills
-          .map(s => String(s).replace(/^\[object Object\],?\s*/g, "").trim())
-          .filter(Boolean);
-      }
-      // softwareSkills may include imageUrl overrides per-skill
-      if (ov.skillsSection.softwareSkills) {
-        ov.skillsSection.softwareSkills.forEach((s, i) => {
-          if (skillsSection.softwareSkills[i]) Object.assign(skillsSection.softwareSkills[i], s);
-          else skillsSection.softwareSkills.push(s);
-        });
-        // trim if user removed items
-        skillsSection.softwareSkills.length = ov.skillsSection.softwareSkills.length;
-        delete ov.skillsSection.softwareSkills;
-      }
-      Object.assign(skillsSection, ov.skillsSection);
-    }
-
-    if (ov.techStack) Object.assign(techStack, ov.techStack);
-
-    if (ov.workExperiences && Array.isArray(ov.workExperiences.expStats)) {
-      workExperiences.expStats = ov.workExperiences.expStats;
-    }
-
-    if (ov.workExperiences && ov.workExperiences.experience) {
-      const ovExp = ov.workExperiences.experience;
-      // Replace the whole array length, merging logos from originals
-      ovExp.forEach((e, i) => {
-        const {companylogoUrl, ...rest} = e;
-        if (workExperiences.experience[i]) {
-          if (companylogoUrl) workExperiences.experience[i].companylogo = companylogoUrl;
-          Object.assign(workExperiences.experience[i], rest);
-        } else {
-          workExperiences.experience.push({
-            ...rest,
-            companylogo: companylogoUrl || ""
-          });
-        }
-      });
-      workExperiences.experience.length = ovExp.length;
-    }
-
-    if (ov.educationInfo && ov.educationInfo.schools) {
-      ov.educationInfo.schools.forEach((s, i) => {
-        const {logoUrl, ...rest} = s;
-        if (educationInfo.schools[i]) {
-          if (logoUrl) educationInfo.schools[i].logo = logoUrl;
-          Object.assign(educationInfo.schools[i], rest);
-        } else {
-          educationInfo.schools.push({...rest, logo: logoUrl || ""});
-        }
-      });
-      educationInfo.schools.length = ov.educationInfo.schools.length;
-    }
-
-    if (ov.achievementSection) {
-      if (ov.achievementSection.title)    achievementSection.title    = ov.achievementSection.title;
-      if (ov.achievementSection.subtitle) achievementSection.subtitle = ov.achievementSection.subtitle;
-      if (ov.achievementSection.achievementsCards) {
-        ov.achievementSection.achievementsCards.forEach((c, i) => {
-          const {imageUrl, ...rest} = c;
-          if (achievementSection.achievementsCards[i]) {
-            if (imageUrl) achievementSection.achievementsCards[i].image = imageUrl;
-            Object.assign(achievementSection.achievementsCards[i], rest);
-          } else {
-            achievementSection.achievementsCards.push({...rest, image: imageUrl || ""});
-          }
-        });
-        achievementSection.achievementsCards.length = ov.achievementSection.achievementsCards.length;
-      }
-    }
-
-    if (ov.blogSection) {
-      if (ov.blogSection.subtitle) blogSection.subtitle = ov.blogSection.subtitle;
-      if (ov.blogSection.blogs)    blogSection.blogs    = ov.blogSection.blogs;
-    }
-
-    if (ov.bigProjects && ov.bigProjects.projects) {
-      ov.bigProjects.projects.forEach((p, i) => {
-        const {imageUrl, ...rest} = p;
-        if (bigProjects.projects[i]) {
-          if (imageUrl) bigProjects.projects[i].image = imageUrl;
-          Object.assign(bigProjects.projects[i], rest);
-        } else {
-          bigProjects.projects.push({...rest, image: imageUrl || ""});
-        }
-      });
-      bigProjects.projects.length = ov.bigProjects.projects.length;
-    }
-  }
-} catch (e) {
-  // silently ignore – don't break the site if localStorage is corrupt
-}
 
 export {
   illustration,
