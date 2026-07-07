@@ -28,8 +28,6 @@ const TOOLS = [
 
 /* Deterministic placement — spread icons evenly so they don't cluster */
 function makeIcons() {
-  const cols = 6, rows = 3;
-  const cellW = 100 / cols, cellH = 100 / rows;
   const offsets = [
     // row 0
     [12,18],[28,8],[46,14],[62,6],[78,20],[90,12],

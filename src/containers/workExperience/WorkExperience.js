@@ -3,9 +3,7 @@ import "./WorkExperience.scss";
 import {workExperiences} from "../../portfolio";
 import StyleContext from "../../contexts/StyleContext";
 import DisplayLottie from "../../components/displayLottie/DisplayLottie";
-// Place developer.json in src/assets/lottie/ (download from LottieFiles)
-let developerLottie;
-try { developerLottie = require("../../assets/lottie/developer.json"); } catch(e) { developerLottie = require("../../assets/lottie/codingPerson"); }
+import developerLottie from "../../assets/lottie/codingPerson";
 
 const BEACON   = 58;   // logo circle diameter (px)
 const STEP_H   = 100;  // vertical gap between nodes
