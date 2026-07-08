@@ -9,7 +9,7 @@ import splashAnimation from "./assets/lottie/splashAnimation"; // Rename to your
 // Flip `enabled` to false (and redeploy) the moment the real site should go live again.
 
 const maintenanceMode = {
-  enabled: true, // set false to show the real portfolio again
+  enabled: false, // set false to show the real portfolio again
   heading: "We're Building Something Awesome",
   messages: [
     "Deploying new features...",
