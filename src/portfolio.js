@@ -39,7 +39,7 @@ const greeting = {
   subTitle:
     "DevOps enthusiast committed to streamlining workflows and fostering collaboration for efficient software delivery. With expertise in automation and cloud technologies, I drive continuous integration and deployment, revolutionizing development practices.",
   resumeLink:
-    "https://drive.google.com/file/d/1ofFdKF_mqscH8WvXkSObnVvC9kK7Ldlu/view?usp=sharing",
+    "https://drive.google.com/file/d/19VvIOCILDFwHpSYkMySXC6knxFRq3MPy/view?usp=sharing",
   heroStats: [
     {value: "4+", label: "Years Experience"},
     {value: "3",  label: "Clouds (AWS/Azure/GCP)"},
@@ -59,7 +59,7 @@ const socialMediaLinks = {
 
   github: "https://github.com/muzakkirsaifi123",
   linkedin: "https://www.linkedin.com/in/mohd-muzakkir-s-b89755175/",
-  gmail: "muzakkirsaifi8@gmail.com",
+  gmail: "sultanmuzakkirsaif@gmail.com",
   gitlab: "",
   facebook: "",
   medium: "",
@@ -519,7 +519,7 @@ const contactInfo = {
   subtitle:
     "Discuss a project or just want to say hi? My Inbox is open for all.",
   // number: "+91-9104234211",
-  email_address: "muzakkirsaifi@gmail.com"
+  email_address: "sultanmuzakkirsaif@gmail.com"
 };
 
 // Twitter Section
