@@ -58,13 +58,13 @@ const socialMediaLinks = {
   display: true, // master switch for the whole social icon row
 
   github: "https://github.com/muzakkirsaifi123",
-  linkedin: "https://www.linkedin.com/in/mohd-muzakkir-s-b89755175/",
+  linkedin: "https://www.linkedin.com/in/mohd-muzakkir-saifi-devops/",
   gmail: "sultanmuzakkirsaif@gmail.com",
   gitlab: "",
   facebook: "",
   medium: "",
   stackoverflow: "",
-  instagram: "",
+  instagram: "sultan_muzakkir",
   twitter: "",
   kaggle: "",
 
@@ -72,13 +72,13 @@ const socialMediaLinks = {
   // the URL above — just flip the switch here.
   show: {
     github: false,
-    linkedin: false,
+    linkedin: true,
     gmail: true,
     gitlab: false,
     facebook: false,
     medium: false,
     stackoverflow: false,
-    instagram: false,
+    instagram: true,
     twitter: false,
     kaggle: false
   }
