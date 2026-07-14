@@ -316,7 +316,7 @@ const workExperiences = {
     },
     {
       role: "Senior Software Development Engineer",
-      company: "SBS",
+      company: "SBS-Software",
       companylogo: require("./assets/images/sbs-4.webp"),
       date: "Mar 2026 – Present",
       desc: "As a Senior Software Development Engineer at SBS, Part of Axway, I have spearheaded numerous projects aimed at enhancing project capabilities and introducing innovative features. I managed project development and supervised DevOps interns, ensuring seamless operations. Currently, I'm focused on a cutting-edge project utilizing Helm, Kubernetes, Python, Azure DevOps, Terraform, and other tools to deploy a new application efficiently."
