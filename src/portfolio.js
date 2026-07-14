@@ -315,9 +315,9 @@ const workExperiences = {
       desc: "As a Senior DevOps Engineer at Nashtech, I have spearheaded numerous projects aimed at enhancing project capabilities and introducing innovative features. I managed project development and supervised DevOps interns, ensuring seamless operations. Currently, I'm focused on a cutting-edge project utilizing Helm, Kubernetes, Python, Azure DevOps, Terraform, and other tools to deploy a new application efficiently."
     },
     {
-      role: "Senior DevOps Engineer",
+      role: "Senior Software Development Engineer",
       company: "SBS",
-      companylogo: require("./assets/images/sbs-logo (1).svg"),
+      companylogo: require("./assets/images/soprabanking-5.webp"),
       date: "Mar 2026 – Present",
       desc: "As a Senior Software Development Engineer at SBS, Part of Axway, I have spearheaded numerous projects aimed at enhancing project capabilities and introducing innovative features. I managed project development and supervised DevOps interns, ensuring seamless operations. Currently, I'm focused on a cutting-edge project utilizing Helm, Kubernetes, Python, Azure DevOps, Terraform, and other tools to deploy a new application efficiently."
     }
@@ -363,6 +363,19 @@ const bigProjects = {
       //     url: "http://nextu.se/"
       //   }
       // ]
+    },
+    {
+      image: require("./assets/images/blacktothelab.avif"),
+      projectName: "Black To The Lab ",
+      projectDesc:
+        "As a Senior DevOps engineer, I employ Terraform to automate infrastructure provisioning and create Terratest test cases for validation. Additionally, I orchestrate complete application deployment through Terraform, Azure DevOps, and custom scripts to ensure seamless automation.",
+      footerLink: [
+        // {
+        //   name: "Visit Website",
+        //   url: "http://saayahealth.com/"
+        // }
+        //  you can add extra buttons here.
+      ]
     }
   ],
   display: true // Set false to hide this section, defaults to true
